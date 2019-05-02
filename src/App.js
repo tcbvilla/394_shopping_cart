@@ -39,6 +39,21 @@ class App extends Component {
       <div>
 
 
+        <Shelf
+          SelectProduct={this.SelectProduct}
+        />
+        <ShoppingCart
+          cartTotal={{
+            Quantity: this.state.Quantity,
+            TotalPrice: this.state.TotalPrice
+          }}
+          isOpen={this.state.openCart}
+          handleToggle={this.handleToggle}
+          InCart={this.state.InCart}
+          removeProduct={this.removeProduct}
+
+
+        />
       </div>
     )
   }
