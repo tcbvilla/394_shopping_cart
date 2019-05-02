@@ -22,70 +22,11 @@ class App extends Component {
 
 
   SelectProduct(product) {
-    this.setState(prevState => {
-      product.quantity += 1;
-      let n_cart = this.state.InCart
-      let flag = false
-      for (let i in n_cart) {
-        let item = n_cart[i];
-        if (item.sku === product.sku) {
-          flag = true
-        }
-      }
-      if (flag === false)
-      {
-        return {
-          Quantity: prevState.Quantity + 1,
-          InCart: prevState.InCart.concat(product),
-          TotalPrice: prevState.TotalPrice + product.price
-
-
-        }
-      }
-
-      else
-      {
-        return {
-          Quantity: prevState.Quantity + 1,
-
-          TotalPrice: prevState.TotalPrice + product.price
-
-
-        }
-      }
-
-    });
+ 
     this.setState({ openCart: true })
   }
 
-removeProduct = product  =>{
-      this.setState(prevState => {
-      let { InCart } = prevState;
-      let updated_price = this.state.TotalPrice - product.price * product.quantity;
-
-      this.setState({'TotalPrice':updated_price});
-      let updated_cart = this.state.InCart;
-      for (let i in updated_cart)
-      {
-        let item = updated_cart[i];
-        if (item.sku === product.sku)
-        {
-          delete updated_cart[i];
-          prevState.Quantity -= product.quantity;
-          product.quantity = 0;
-          if (prevState.Quantity <= 0)
-          {
-            this.setState({'TotalPrice':0})
-
-
-          }
-          break
-        }
-      }
-
-
-      return updated_cart
-    })
+  removeProduct = product  =>{
   };
 
 
