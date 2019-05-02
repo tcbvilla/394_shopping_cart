@@ -36,7 +36,7 @@ class Shelf extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this)
-    
+    this.checksize = this.checksize.bind(this)
 
   }
 
@@ -46,7 +46,14 @@ class Shelf extends React.Component {
     this.setState({ value1: event.target.value });
   };
 
+  checksize(products) {
 
+    let temp = this.state.value1;
+    if (temp === 'ALL') return products
+    else
+    return products.availableSizes.indexOf(temp) > -1
+
+  }
   render() {
     const { classes } = this.props;
 
@@ -76,7 +83,7 @@ class Shelf extends React.Component {
 
         </div>
       <div className='shelf-container'>
-      {products.map(product =>
+      {products.filter(this.checksize).map(product =>
         <Item product={product}
               SelectProduct={this.props.SelectProduct} key={product.sku} />)}
   </div>
