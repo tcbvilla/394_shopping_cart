@@ -22,7 +22,40 @@ class App extends Component {
 
 
   SelectProduct(product) {
+    this.setState(prevState => {
+      product.quantity += 1;
+      let n_cart = this.state.InCart
+      let flag = false
+      for (let i in n_cart) {
+        let item = n_cart[i];
+        if (item.sku === product.sku) {
+          flag = true
+        }
+      }
+      if (flag === false)
+      {
+        return {
+          Quantity: prevState.Quantity + 1,
+          InCart: prevState.InCart.concat(product),
+          TotalPrice: prevState.TotalPrice + product.price
 
+
+        }
+      }
+
+      else
+      {
+        return {
+          Quantity: prevState.Quantity + 1,
+
+          TotalPrice: prevState.TotalPrice + product.price
+
+
+        }
+      }
+
+    });
+    this.setState({ openCart: true })
   }
 
   removeProduct = product  =>{
