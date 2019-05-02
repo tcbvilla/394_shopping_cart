@@ -59,6 +59,33 @@ class App extends Component {
   }
 
   removeProduct = product  =>{
+      this.setState(prevState => {
+      let { InCart } = prevState;
+      let updated_price = this.state.TotalPrice - product.price * product.quantity;
+
+      this.setState({'TotalPrice':updated_price});
+      let updated_cart = this.state.InCart;
+      for (let i in updated_cart)
+      {
+        let item = updated_cart[i];
+        if (item.sku === product.sku)
+        {
+          delete updated_cart[i];
+          prevState.Quantity -= product.quantity;
+          product.quantity = 0;
+          if (prevState.Quantity <= 0)
+          {
+            this.setState({'TotalPrice':0})
+
+
+          }
+          break
+        }
+      }
+
+
+      return updated_cart
+    })
   };
 
 
